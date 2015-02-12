@@ -2,3 +2,6 @@
 .ruby-version
 .ruby-gemset
 TODO
+
+# SECRETS
+config/keys.yml
