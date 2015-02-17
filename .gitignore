@@ -5,3 +5,6 @@ TODO
 
 # SECRETS
 config/keys.yml
+
+# logs
+logs/*
