@@ -2,10 +2,11 @@ require 'yaml'
 
 class APIKeys
 
-  API_KEYS_FILE = 'config/keys.yml'
+  BASEPATH      =  File.expand_path(File.dirname(__FILE__)) + '/'
+  API_KEYS_FILE = 'keys.yml'
 
   def initialize
-    @keys = YAML.load_file(API_KEYS_FILE)
+    @keys = YAML.load_file(BASEPATH + API_KEYS_FILE)
   end
 
   def consumer_key
