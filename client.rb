@@ -15,6 +15,20 @@ class Client
     end
   end
 
+  def twitter
+    @client
+  end
+
+  def block(accounts)
+
+    begin
+      @client.block(accounts)
+    rescue Twitter::Error::NotFound => error
+      # is this output actually helpful??
+      puts error
+    end
+  end
+
   def ebooks_search
 
     results = []

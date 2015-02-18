@@ -23,6 +23,9 @@ if new_accounts.size > 0
     end
   end
 
+  # block any new accounts as they're found
+  client.block(new_accounts.map{|a| a[:id].to_i})
+
   # log new accounts
   File.open(BASEPATH + NEWACCLOG,'a') do |f|
     f.puts "\n[#{Time.now}]"

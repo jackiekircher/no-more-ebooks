@@ -25,7 +25,7 @@ class BlockList
   end
 
   def ids
-    @blocked.map{|account| account[:id]}
+    @blocked.map{|account| account[:id].to_i}
   end
 
   def sorted_ids
