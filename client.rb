@@ -43,6 +43,11 @@ class Client
         print "  retry in #{error.rate_limit.reset_in} seconds"
         puts  " (#{Time.now + error.rate_limit.reset_in})"
         break
+
+      rescue Twitter::Error::ServiceUnavailable => error
+        puts "Twitter is down, let's give it a sec (or 15)..."
+        sleep(15)
+        retry
       end
     end
 
