@@ -1,11 +1,7 @@
-require          'twitter'
-require_relative 'ebook_account'
-require_relative 'config/api_keys'
-
 class Client
 
   def initialize
-    keys = APIKeys.new
+    keys = NoMoreEbooks.api_keys
 
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key        = keys.consumer_key

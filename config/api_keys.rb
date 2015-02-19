@@ -1,12 +1,7 @@
-require 'yaml'
-
 class APIKeys
 
-  BASEPATH      =  File.expand_path(File.dirname(__FILE__)) + '/'
-  API_KEYS_FILE = 'keys.yml'
-
-  def initialize
-    @keys = YAML.load_file(BASEPATH + API_KEYS_FILE)
+  def initialize(keys_file)
+    @keys = YAML.load_file(keys_file)
   end
 
   def consumer_key
