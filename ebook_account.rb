@@ -1,6 +1,7 @@
 class EbookAccount
 
-  ACCOUNT_FILE  = File.expand_path(File.dirname(__FILE__)) + '/db/accounts.stuff'
+  ACCOUNT_FILE = File.expand_path(File.dirname(__FILE__)) +
+                 '/db/accounts.stuff'
 
   def self.all_accounts
     accounts = []

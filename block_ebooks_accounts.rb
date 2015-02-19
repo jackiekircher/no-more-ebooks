@@ -1,7 +1,12 @@
+require          'logger'
 require_relative 'client'
 
-BASEPATH  =  File.expand_path(File.dirname(__FILE__)) + '/'
-NEWACCLOG = 'logs/new_accounts.log'
+BASEPATH = File.expand_path(File.dirname(__FILE__)) + '/'
+logger   = Logger.new(BASEPATH + 'logs/new_accounts.log',
+                      10, 1024000)
+logger.formatter = proc do |level, datetime, progname, msg|
+                     "\n[#{datetime}] #{level}\n  #{msg}\n"
+                   end
 
 # read in list of accounts to block
 ebooks_accounts = EbookAccount.all_ids
@@ -36,4 +41,9 @@ end
 # allow option to not block these accounts or create a whitelist
 
 # block as many accounts left on the list as possible
-client.block(ebooks_accounts)
+if ebooks_accounts.size > 1
+  client.block(ebooks_accounts)
+  logger.info do
+    "successfully blocked #{ebooks_accounts.size} accounts"
+  end
+end

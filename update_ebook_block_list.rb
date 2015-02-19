@@ -1,8 +1,13 @@
+require          'logger'
 require_relative 'client'
 
-BASEPATH  =  File.expand_path(File.dirname(__FILE__)) + '/'
-BLOCKED   = 'db/accounts.stuff'
-NEWACCLOG = 'logs/new_accounts.log'
+BASEPATH =  File.expand_path(File.dirname(__FILE__)) + '/'
+BLOCKED  = 'db/accounts.stuff'
+logger   =  Logger.new(BASEPATH + 'logs/new_accounts.log',
+                        10, 1024000)
+logger.formatter = proc do |level, datetime, progname, msg|
+                     "\n[#{datetime}] #{level}\n  #{msg}\n"
+                   end
 
 # read in current accounts
 client       = Client.new
@@ -27,16 +32,18 @@ if new_accounts.size > 0
   client.block(new_accounts.map{|a| a[:id].to_i})
 
   # log new accounts
-  File.open(BASEPATH + NEWACCLOG,'a') do |f|
-    f.puts "\n[#{Time.now}]"
-    f.puts "  new accounts:"
+  logger.info do
+    message = "new accounts:\n"
     new_accounts.each do |account|
-      f.puts "    #{account[:id]} \t:  #{account[:screen_name]}"
+      message += "    #{account[:id]} \t"
+      message += ":  #{account[:screen_name]}"
     end
+
+    message
   end
 else
-  File.open(BASEPATH + NEWACCLOG,'a') do |f|
-    f.puts "\n[#{Time.now}]"
-    f.puts "  NO new accounts found"
+
+  logger.info do
+    "NO new accounts found"
   end
 end
