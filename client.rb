@@ -1,5 +1,5 @@
 require          'twitter'
-require_relative 'block_list'
+require_relative 'ebook_account'
 require_relative 'config/api_keys'
 
 class Client

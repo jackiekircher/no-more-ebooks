@@ -1,11 +1,10 @@
 require_relative 'client'
 
 BASEPATH  =  File.expand_path(File.dirname(__FILE__)) + '/'
-BLOCKED   = 'db/accounts.stuff'
 NEWACCLOG = 'logs/new_accounts.log'
 
 # read in list of accounts to block
-ebooks_accounts = BlockList.new(BASEPATH + BLOCKED).ids
+ebooks_accounts = EbookAccount.all_ids
 
 client  = Client.new         # authenticate with user context for jackiekircher
 twitter = Client.new.twitter # authenticate with user context for jackiekircher

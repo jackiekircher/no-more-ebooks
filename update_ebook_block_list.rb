@@ -7,12 +7,12 @@ NEWACCLOG = 'logs/new_accounts.log'
 # read in current accounts
 client       = Client.new
 new_list     = client.ebooks_search
-current_list = BlockList.new(BASEPATH + BLOCKED)
+current_list = EbookAccount.all_accounts
 
 # what to do here? I don't like assuming the same format
-# from multiple sources but it's silly to use the BlockList
-# file read to get new accounts when searching.
-new_accounts = new_list - current_list.full_list
+# from multiple sources but it's silly to use the
+# EbookAccount file read to get new accounts when searching.
+new_accounts = new_list - current_list
 
 if new_accounts.size > 0
 
