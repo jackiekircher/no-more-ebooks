@@ -17,7 +17,7 @@ if new_accounts.size > 0
   end
 
   # block any new accounts as they're found
-  client.block(new_accounts.map{|a| a[:id].to_i})
+  client.block(new_accounts.map{|a| a[:id]})
 
   # log new accounts
   logger.info do

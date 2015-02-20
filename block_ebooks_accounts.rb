@@ -28,7 +28,7 @@ followed_by_ebooks = ebooks_accounts.select{|e| followed_by.include?(e)}
 if followed_by_ebooks.size > 1
   full_info = EbookAccount.all_accounts
   followed_by_ebooks.map! do |id|
-    full_info[full_info.find_index{|a| a[:id] == id.to_s}]
+    full_info[full_info.find_index{|a| a[:id] == id}]
   end
 
   puts "\nWARNING - certain accounts that are about to be blocked are following you"

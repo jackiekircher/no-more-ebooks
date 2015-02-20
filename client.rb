@@ -34,7 +34,7 @@ class Client
                                        {page: i})
         accounts.select!{|r| r.screen_name =~ /_ebooks$/i}
         accounts.each do |account|
-          results << {          id: account.id.to_s,
+          results << {          id: account.id,
                        screen_name: account.screen_name }
         end
 

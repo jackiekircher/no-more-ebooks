@@ -8,8 +8,8 @@ class EbookAccount
     File.open(ACCOUNT_FILE, 'r') do |file|
       file.each do |line|
         account = line.split(":")
-        accounts << {          id: account[0].strip,
-                      screen_name: account[1].strip  }
+        accounts << {          id: account[0].strip.to_i,
+                      screen_name: account[1].strip       }
       end
     end
 
@@ -21,6 +21,6 @@ class EbookAccount
   end
 
   def self.all_ids
-    all_accounts.map{|account| account[:id].to_i}
+    all_accounts.map{|account| account[:id]}
   end
 end
