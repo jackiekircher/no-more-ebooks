@@ -26,9 +26,19 @@ followed_by = twitter.follower_ids
 followed_by_ebooks = ebooks_accounts.select{|e| followed_by.include?(e)}
 
 if followed_by_ebooks.size > 1
-  puts "\nwarning: certain accounts that are about to be blocked are following you"
-  puts followed_by_ebooks
-  puts "\n"
+  full_info = EbookAccount.all_accounts
+  followed_by_ebooks.map! do |id|
+    full_info[full_info.find_index{|a| a[:id] == id.to_s}]
+  end
+
+  puts "\nWARNING - certain accounts that are about to be blocked are following you"
+  followed_by_ebooks.each do |account|
+    puts "  #{account[:id]} \t:  #{account[:screen_name]}"
+  end
+  puts "\ncontinue? (y/n)"
+  cont = gets.strip
+
+  exit if cont != "y" && cont != "Y"
 end
 
 # TODO
