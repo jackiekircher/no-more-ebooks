@@ -4,7 +4,7 @@
 TODO
 
 # SECRETS
-config/keys.yml
+original_scripts/config/keys.yml
 
 # logs
-logs/*
+original_scripts/logs/*
