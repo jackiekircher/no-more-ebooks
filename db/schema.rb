@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20150224004313) do
 
   create_table "ebook_accounts", force: :cascade do |t|
-    t.integer  "twitter_id"
+    t.integer  "twitter_id",  limit: 5
     t.string   "screen_name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end
