@@ -10,7 +10,7 @@ new_accounts = new_list - current_list
 if new_accounts.size > 0
 
   # write new accounts
-  File.open(NoMoreEbooks::BLOCKED, 'a') do |f|
+  File.open(NoMoreEbooks::BLOCKLIST, 'a') do |f|
     new_accounts.each do |account|
       f.puts "#{account[:id]} \t:  #{account[:screen_name]}"
     end
@@ -24,7 +24,7 @@ if new_accounts.size > 0
     message = "new accounts:\n"
     new_accounts.each do |account|
       message += "    #{account[:id]} \t"
-      message += ":  #{account[:screen_name]}"
+      message += ":  #{account[:screen_name]}\n"
     end
 
     message
