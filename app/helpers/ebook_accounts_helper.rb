@@ -1,0 +1,2 @@
+module EbookAccountsHelper
+end
