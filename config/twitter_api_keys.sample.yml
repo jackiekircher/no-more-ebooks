@@ -1,0 +1,15 @@
+##
+# fill in the following with the values you need at
+# https://apps.twitter.com/ > App > Keys and Access Tokens
+
+# Application Settings
+consumer_key:
+  # Consumer Key (API Key)
+consumer_secret:
+  # Consumer Secret (API Secret)
+
+# Your Access Token
+access_token:
+  # Access Token
+access_token_secret:
+  # Access Token Secret

@@ -25,6 +25,7 @@ TODO
 
 # SECRETS
 original_scripts/config/keys.yml
+/config/twitter_api_keys.yml
 
 # logs
 original_scripts/logs/*
