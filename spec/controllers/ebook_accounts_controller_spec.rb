@@ -9,4 +9,10 @@ RSpec.describe EbookAccountsController, type: :controller do
     end
   end
 
+  describe "GET #block_confirmation" do
+    it "returns http success" do
+      get :block_confirmation
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

@@ -1,8 +1,8 @@
 %h1
-  full list of _ebooks accounts
+  _ebooks accounts to be blocked
 
 %p
-  = "current total: #{@blocked_accounts.count}"
+  the following accounts will be blocked:
 
 %table
   %tr
@@ -11,7 +11,7 @@
     %th{ scope: "col" }
       screen name
 
-  - @blocked_accounts.each do |account|
+  - @accounts_to_block.each do |account|
     %tr
       %td
         = account.twitter_id
