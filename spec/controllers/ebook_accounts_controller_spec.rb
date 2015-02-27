@@ -15,4 +15,11 @@ RSpec.describe EbookAccountsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "POST #block" do
+    it "returns http success" do
+      post :block
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

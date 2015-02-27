@@ -20,4 +20,26 @@ class Blocker
 
     return accounts_to_block
   end
+
+  def block
+    accounts_to_block = to_be_blocked
+    return [] if accounts_to_block.size < 1
+
+    blocked_accounts = @client.block(
+                         accounts_to_block.map(&:twitter_id),
+                       { include_entities: false,
+                              skip_status: true }
+                       )
+
+    account_log = AccountLogger.new
+    account_log.info do
+      "successfully blocked #{blocked_accounts.size} accounts"
+      # also log authenticated account info
+    end
+
+    return blocked_accounts.map do |account|
+      EbookAccount.new(twitter_id: account.id,
+                       screen_name: account.screen_name)
+    end
+  end
 end

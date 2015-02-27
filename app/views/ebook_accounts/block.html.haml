@@ -1,0 +1,19 @@
+%h1
+  accounts blocked!
+
+%p
+  successfully blocked the following accounts:
+
+%table
+  %tr
+    %th{ scope: "col" }
+      twitter id
+    %th{ scope: "col" }
+      screen name
+
+  - @accounts_blocked.each do |account|
+    %tr
+      %td
+        = account.twitter_id
+      %td
+        = account.screen_name
