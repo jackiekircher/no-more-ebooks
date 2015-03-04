@@ -12,9 +12,9 @@ end
 RSpec.describe Blocker do
 
   before :each do
-    @twitter_mock = double("twitter::client")
-    allow(@twitter_mock).to receive(:blocked_ids).and_return([])
-    allow(@twitter_mock).to receive(:friend_ids).and_return([])
+    @twitter_client = instance_double("TwitterClient")
+    allow(@twitter_client).to receive(:blocked_ids).and_return([])
+    allow(@twitter_client).to receive(:friend_ids).and_return([])
 
     @accounts = [
       Account.new(twitter_id: 11, screen_name: "suzy"),
@@ -25,7 +25,7 @@ RSpec.describe Blocker do
   describe "#to_be_blocked" do
 
     it "lists all accounts" do
-      blocker = Blocker.new(client: @twitter_mock,
+      blocker = Blocker.new(client: @twitter_client,
                             account_list: @accounts)
 
       expect(blocker.to_be_blocked.count).to eq(@accounts.length)
@@ -34,13 +34,13 @@ RSpec.describe Blocker do
     it "does not include accounts already blocked" do
       b_account = Account.new(twitter_id: rand(100) + 30,
                               screen_name: "annoyotron")
-      allow(@twitter_mock).
+      allow(@twitter_client).
         to receive(:blocked_ids).
         and_return([b_account.twitter_id])
 
       @accounts << b_account
       @accounts.shuffle!
-      blocker = Blocker.new(client: @twitter_mock,
+      blocker = Blocker.new(client: @twitter_client,
                             account_list: @accounts)
 
       expect(blocker.to_be_blocked).not_to include(b_account)
@@ -49,13 +49,13 @@ RSpec.describe Blocker do
     it "does not include accounts currently followed" do
       f_account = Account.new(twitter_id: rand(100) + 30,
                               screen_name: "true friend")
-      allow(@twitter_mock).
+      allow(@twitter_client).
         to receive(:friend_ids).
         and_return([f_account.twitter_id])
 
       @accounts << f_account
       @accounts.shuffle!
-      blocker = Blocker.new(client: @twitter_mock,
+      blocker = Blocker.new(client: @twitter_client,
                             account_list: @accounts)
 
       expect(blocker.to_be_blocked).not_to include(f_account)
@@ -66,11 +66,11 @@ RSpec.describe Blocker do
 
     it "does not ping the twitter api if there are no
         accounts to block" do
-      blocker = Blocker.new(client: @twitter_mock,
+      blocker = Blocker.new(client: @twitter_client,
                             account_list: @accounts)
       allow(blocker).
         to receive(:to_be_blocked).and_return([])
-      twitter_spy = spy(@twitter_mock)
+      twitter_spy = spy(@twitter_client)
 
       blocker.block
 
@@ -78,16 +78,16 @@ RSpec.describe Blocker do
     end
 
     it "blocks the accounts" do
-      blocker = Blocker.new(client: @twitter_mock,
+      blocker = Blocker.new(client: @twitter_client,
                             account_list: @accounts)
       allow(blocker).
         to receive(:to_be_blocked).and_return(@accounts)
-      allow(@twitter_mock).
+      allow(@twitter_client).
         to receive(:block).with(any_args).and_return([])
 
       blocker.block
 
-      expect(@twitter_mock).
+      expect(@twitter_client).
         to have_received(:block).with(@accounts.map(&:twitter_id), anything)
     end
   end
