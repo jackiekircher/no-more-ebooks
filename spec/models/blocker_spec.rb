@@ -64,6 +64,14 @@ RSpec.describe Blocker do
 
   describe "#block" do
 
+    # should I put this somewhere else so that tests
+    # never accidentally write out to the log?
+    before :each do
+      allow(AccountLogger).to receive(:new) do
+        instance_double("AccountLogger").as_null_object
+      end
+    end
+
     it "does not ping the twitter api if there are no
         accounts to block" do
       blocker = Blocker.new(client: @twitter_client,

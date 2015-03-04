@@ -11,6 +11,9 @@ RSpec.describe EbookAccountsController, type: :controller do
 
   describe "GET #block_confirmation" do
     it "returns http success" do
+      blocker = instance_double("Blocker").as_null_object
+      allow(Blocker).to receive(:new) { blocker }
+
       get :block_confirmation
       expect(response).to have_http_status(:success)
     end
@@ -18,6 +21,9 @@ RSpec.describe EbookAccountsController, type: :controller do
 
   describe "POST #block" do
     it "returns http success" do
+      blocker = instance_double("Blocker").as_null_object
+      expect(Blocker).to receive(:new) { blocker }
+
       post :block
       expect(response).to have_http_status(:success)
     end
