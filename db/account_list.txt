@@ -5,7 +5,6 @@
 1663565360 	:  mstea_ebooks
 487851005 	:  karl_ebooks
 551337935 	:  nytimes_ebooks
-312635492 	:  priya_ebooks
 400313120 	:  zizek_ebooks
 2478060493 	:  thegrugq_ebooks
 789336668 	:  abby_ebooks
@@ -197,7 +196,6 @@
 425508492 	:  Snark_Ebooks
 2343220158 	:  haikyuu_ebooks
 2778785828 	:  JonTron_ebooks
-2472981608 	:  ryand123_ebooks
 409763888 	:  bowie_ebooks
 60694744  	:  am_ebooks
 855489121 	:  dahmer_ebooks
@@ -429,3 +427,5 @@
 2771738172 	:  mister_ebooks
 3005809272 	:  johnb78_ebooks
 3004544674 	:  Kirtaner_ebooks
+743994674 :  DANGER_EBOOKS
+1651202917  :  winona_ebooks
