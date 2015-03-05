@@ -2,6 +2,7 @@ class EbookAccount < ActiveRecord::Base
   ##
   # twitter_id:integer
   # => the ID that twitter has assigned to the user
+  validates :twitter_id, uniqueness: true
 
   ##
   # screen_name:string

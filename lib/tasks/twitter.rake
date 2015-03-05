@@ -18,10 +18,12 @@ namespace :twitter do
 
       # write new accounts
       new_accounts.each do |account|
-        EbookAccount.create(
-          twitter_id:  account[:twitter_id],
-          screen_name: account[:screen_name]
-        )
+        begin
+          EbookAccount.create!(account)
+        rescue ActiveRecord::RecordInvalid
+          record = EbookAccount.where(twitter_id: account[:twitter_id]).first
+          record.update(screen_name: account[:screen_name])
+        end
       end
 
       # block any new accounts as they're found
